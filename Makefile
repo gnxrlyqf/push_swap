@@ -1,4 +1,3 @@
-
 CC = cc
 CFLAGS = -Wall -Wextra -g #-Werror
 INC = -I./includes

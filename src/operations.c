@@ -9,30 +9,48 @@ void swap(t_list **stack)
 
 void push(t_list **s1, t_list **s2)
 {
+	t_list *to_push;
 	t_list *prev;
 	t_list *next;
 
-	prev = (*s1)->prev;
-	next = (*s1)->next;
-	prev->next = next;
-	next->prev = prev;
-	(*s1)->next = *s2;
-	(*s1)->prev = (*s2)->prev;
-	(*s2)->prev->next = *s1;
-	(*s2)->prev = *s1;
-	*s2 = *s1;
-	*s1 = next;
+	if (!s1 || !*s1)
+		return;
+	to_push = *s1;
+	if (*s1 == (*s1)->next)
+		*s1 = NULL;
+	else
+	{
+		prev = to_push->prev;
+		next = to_push->next;
+		prev->next = next;
+		next->prev = prev;
+		*s1 = next;
+	}
+	if (!s2 || !*s2)
+	{
+		to_push->next = to_push;
+		to_push->prev = to_push;
+		*s2 = to_push;
+	}
+	else
+	{
+		to_push->next = *s2;
+		to_push->prev = (*s2)->prev;
+		(*s2)->prev->next = to_push;
+		(*s2)->prev = to_push;
+		*s2 = to_push;
+	}
 }
 
 void rotate(t_list **stack, int rev)
 {
 	if (!rev)
-		*stack = (*stack)->next;
-	else
 		*stack = (*stack)->prev;
+	else
+		*stack = (*stack)->next;
 }
 
-void op(t_stacks *s, t_op op)
+void op(t_stacks *s, t_op op, t_move **moves)
 {
 	if (op == SA)
 		swap(&(s->a));
@@ -44,9 +62,9 @@ void op(t_stacks *s, t_op op)
 		swap(&(s->b));
 	}
 	if (op == PA)
-		push(&(s->a), &(s->b));
-	if (op == PB)
 		push(&(s->b), &(s->a));
+	if (op == PB)
+		push(&(s->a), &(s->b));
 	if (op == RA || op == RRA)
 		rotate(&(s->a), RRA - op);
 	if (op == RB || op == RRB)
@@ -56,4 +74,11 @@ void op(t_stacks *s, t_op op)
 		rotate(&(s->a), RRR - op);
 		rotate(&(s->b), RRR - op);
 	}
+	add_move(moves, op);
+}
+
+void loop_op(t_stacks *s, t_op opcode, int count, t_move **moves)
+{
+	while (count--)
+		op(s, opcode, moves);
 }

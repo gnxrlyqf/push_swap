@@ -1,0 +1,15 @@
+{
+	"files.associations": {
+		"push_swap.h": "c",
+		"random": "c",
+		"ratio": "c",
+		"array": "c",
+		"bitset": "c",
+		"string_view": "c",
+		"format": "c",
+		"initializer_list": "c",
+		"span": "c",
+		"*.tcc": "c"
+	},
+	"C_Cpp.errorSquiggles": "disabled"
+}
