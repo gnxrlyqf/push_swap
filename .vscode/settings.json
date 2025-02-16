@@ -9,7 +9,8 @@
 		"format": "c",
 		"initializer_list": "c",
 		"span": "c",
-		"*.tcc": "c"
+		"*.tcc": "c",
+		"algorithm": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

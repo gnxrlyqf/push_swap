@@ -27,17 +27,57 @@ void moves(t_stacks *stacks, int pos_a, int pos_b, t_move **moves)
 {
 	int size_a;
 	int size_b;
+	int count[4];
 
+	count[0] = 0;
+	count[1] = 0;
+	count[2] = 0;
+	count[3] = 0;
 	size_a = stack_size(stacks->a);
 	size_b = stack_size(stacks->b);
-
 	if (pos_a < size_a / 2)
-		loop_op(stacks, RA, pos_a, moves);
+		count[0] = pos_a;
 	else
-		loop_op(stacks, RRA, abs(pos_a - size_a), moves);
+		count[2] = size_a - pos_a;
 	if (pos_b < size_b / 2)
-		loop_op(stacks, RB, pos_b, moves);
+		count[1] = pos_b;
 	else
-		loop_op(stacks, RRB, abs(pos_b - size_b), moves);
+		count[3] = size_b - pos_b;
+	while (count[0] > 0 || count[1] > 0 || count[2] > 0 || count[3] > 0)
+	{
+		if (count[0]-- > 0)
+			op(stacks, RA, moves);
+		if (count[1]-- > 0)
+			op(stacks, RB, moves);
+		if (count[2]-- > 0)
+			op(stacks, RRA, moves);
+		if (count[3]-- > 0)
+			op(stacks, RRB, moves);
+	}
 	op(stacks, PB, moves);
+}
+
+void optimize(t_move *moves)
+{
+	t_move *curr;
+
+	curr = moves;
+	while (curr)
+	{
+		if (curr->op == RA && curr->next && curr->next->op == RB)
+		{
+			print_op(RR);
+			curr = curr->next->next;
+		}
+		else if (curr->op == RRA && curr->next && curr->next->op == RRB)
+		{
+			print_op(RRR);
+			curr = curr->next->next;
+		}
+		else
+		{
+			print_op(curr->op);
+			curr = curr->next;
+		}
+	}
 }

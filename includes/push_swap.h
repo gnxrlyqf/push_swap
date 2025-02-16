@@ -2,6 +2,7 @@
 # define PUSH_SWAP_H
 
 # include <stdio.h>
+# include <unistd.h>
 # include <stdlib.h>
 
 typedef struct s_list {
@@ -59,5 +60,9 @@ t_list *get_max(t_list *stack);
 t_list *get_min(t_list *stack);
 t_list *get_next(t_list *stack, int n);
 void loop_op(t_stacks *s, t_op opcode, int count, t_move **moves);
+void print_op(t_op op);
+int max(int a, int b);
+int same_sign(int a, int b);
+
 
 #endif

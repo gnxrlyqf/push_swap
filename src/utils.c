@@ -22,15 +22,23 @@ int	ft_atoi(const char *str)
 	return (result * sign);
 }
 
-int min_abs(int a, int b)
-{
-	if (abs(a) < abs(b))
-		return (a);
-	return (b);
-}
 int min(int a, int b)
 {
 	if (a < b)
 		return (a);
 	return (b);
+}
+
+int max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+int same_sign(int a, int b)
+{
+	if (a * b > 0)
+		return (1);
+	return (0);
 }
