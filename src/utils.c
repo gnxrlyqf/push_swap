@@ -1,44 +1,76 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchetoui <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/18 17:05:14 by mchetoui          #+#    #+#             */
+/*   Updated: 2025/02/18 17:05:16 by mchetoui         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <push_swap.h>
 
-int	ft_atoi(const char *str)
+long	ft_atoi_ptr(char **str)
 {
-	int	sign;
-	int	result;
+	int		sign;
+	long	result;
+	char	*cpy;
 
 	result = 0;
 	sign = 1;
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '-' || *str == '+')
+	cpy = *str;
+	while (*cpy == ' ' || (*cpy >= 9 && *cpy <= 13))
+		cpy++;
+	if (*cpy == '-' || *cpy == '+')
 	{
-		sign *= (44 - *str);
-		str++;
+		sign *= (44 - *cpy);
+		cpy++;
 	}
-	while (*str >= '0' && *str <= '9')
+	while (*cpy >= '0' && *cpy <= '9')
 	{
-		result = result * 10 + (*str - '0');
-		str++;
+		result = result * 10 + (*cpy - '0');
+		cpy++;
 	}
+	*str = cpy;
 	return (result * sign);
 }
 
-int min(int a, int b)
+int	min(int a, int b)
 {
 	if (a < b)
 		return (a);
 	return (b);
 }
 
-int max(int a, int b)
+int	max(int a, int b)
 {
 	if (a > b)
 		return (a);
 	return (b);
 }
 
-int same_sign(int a, int b)
+void	free_stack(t_list *stack)
 {
-	if (a * b > 0)
-		return (1);
-	return (0);
+	t_list	*curr;
+	t_list	*temp;
+	int		size;
+
+	curr = stack;
+	size = stack_size(stack);
+	while (size--)
+	{
+		temp = curr;
+		curr = curr->next;
+		free(temp);
+	}
+}
+
+void	throw_err(t_list *stack)
+{
+	if (stack)
+		free_stack(stack);
+	write(2, "Error\n", 6);
+	exit(1);
 }

@@ -1,32 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchetoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/18 17:05:01 by mchetoui          #+#    #+#             */
-/*   Updated: 2025/02/18 17:05:03 by mchetoui         ###   ########.fr       */
+/*   Created: 2025/02/18 17:04:54 by mchetoui          #+#    #+#             */
+/*   Updated: 2025/02/18 17:04:59 by mchetoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-int	main(int ac, char **av)
+int	check(char c)
 {
-	t_stacks	stacks;
-
-	if (ac < 3)
-		return (1);
-	if (!validate_input(av + 1))
-		return (write(2, "Error\n", 6));
-	stacks = init_stack(av + 1);
-	if (is_sorted(stacks.a))
+	if (c == ' ' || c == '\0')
+		return (-1);
+	if (c == '+' || c == '-')
 		return (0);
-	else if (stacks.a && stack_size(stacks.a) <= 3)
-		sort_three(&stacks);
-	else
-		sort(&stacks);
-	free_stack(stacks.a);
-	return (0);
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (2);
+}
+
+int	validate_input(char **av)
+{
+	char	*s;
+
+	while (*av)
+	{
+		s = *av;
+		while (*s)
+		{
+			if (check(*s) == 2 || (!check(*s) && !check(*(s + 1)))
+				|| check(*s) - check(*(s + 1)) == 1)
+				return (0);
+			s++;
+		}
+		av++;
+	}
+	return (1);
 }
