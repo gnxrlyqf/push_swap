@@ -33,11 +33,11 @@ void	moves(t_stacks *stacks, int pos_a, int pos_b)
 		loop_op(stacks, RA + 3 * (a < 0), abs(a));
 		loop_op(stacks, RB + 3 * (b < 0), abs(b));
 	}
-	op(stacks, PB);
+	op(stacks, PB, 1);
 }
 
 void	loop_op(t_stacks *s, t_op opcode, int count)
 {
 	while (count--)
-		op(s, opcode);
+		op(s, opcode, 1);
 }

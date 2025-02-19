@@ -67,10 +67,18 @@ void	free_stack(t_list *stack)
 	}
 }
 
-void	throw_err(t_list *stack)
+void	throw_err(t_list *stack, int f)
 {
-	if (stack)
-		free_stack(stack);
+	t_list *curr;
+
+	if (stack && f)
+	{
+		curr = stack;
+		while (curr->next)
+			curr = curr->next;
+		curr->next = stack;
+	}
+	free_stack(stack);
 	write(2, "Error\n", 6);
 	exit(1);
 }

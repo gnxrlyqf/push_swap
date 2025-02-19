@@ -74,15 +74,17 @@ void	sort_three(t_stacks *stacks)
 {
 	int	test;
 
+	if (stacks->a == stacks->a->next->next)
+		op(stacks, SA, 1);
 	test = (stacks->a->n > stacks->a->next->n);
 	test += (stacks->a->next->n > stacks->a->next->next->n);
 	test += (stacks->a->next->next->n > stacks->a->n);
 	if (test == 2)
-		op(stacks, SA);
+		op(stacks, SA, 1);
 	if (stacks->a->n > stacks->a->next->n)
-		op(stacks, RA);
+		op(stacks, RA, 1);
 	if (stacks->a->next->n > stacks->a->next->next->n)
-		op(stacks, RRA);
+		op(stacks, RRA, 1);
 }
 
 void	fill(t_stacks *stacks)
@@ -100,7 +102,7 @@ void	fill(t_stacks *stacks)
 			operation = RRA;
 		}
 		loop_op(stacks, operation, count);
-		op(stacks, PA);
+		op(stacks, PA, 1);
 	}
 	count = get_node_index(stacks->a, get_min(stacks->a));
 	operation = RA;
@@ -120,8 +122,7 @@ void	sort(t_stacks *stacks)
 	int			pos_a;
 	int			pos_b;
 
-	op(stacks, PB);
-	op(stacks, PB);
+	loop_op(stacks, PB, 2);
 	while (stack_size(stacks->a) > 3)
 	{
 		size_a = stack_size(stacks->a);

@@ -67,7 +67,7 @@ t_stacks	init_stack(char **av)
 		{
 			n = ft_atoi_ptr(&str);
 			if (n > INT_MAX || n < INT_MIN || find_node(stacks.a, (int)n))
-				throw_err(NULL);
+				throw_err(stacks.a, 1);
 			new = add_node(&stacks.a, (int)n);
 			new->prev = prev;
 			prev = new;
@@ -99,18 +99,20 @@ int	stack_size(t_list *stack)
 	return (size);
 }
 
-int	is_sorted(t_list *stack)
+int	is_sorted(t_stacks stacks)
 {
 	t_list	*curr;
 
-	curr = stack;
+	if (stacks.b)
+		return (write(1, "KO\n", 3), 0);
+	curr = stacks.a;
 	while (1)
 	{
 		if (curr->n > curr->next->n)
-			return (0);
+			return (write(1, "KO\n", 3), 0);
 		curr = curr->next;
-		if (curr->next == stack)
+		if (curr->next == stacks.a)
 			break ;
 	}
-	return (1);
+	return (write(1, "OK\n", 3), 1);
 }

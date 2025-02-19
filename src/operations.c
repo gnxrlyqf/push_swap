@@ -14,6 +14,8 @@
 
 void	swap(t_list **stack)
 {
+	if (!*stack || !(*stack)->next)
+		return ;
 	(*stack)->n = (*stack)->n ^ (*stack)->next->n;
 	(*stack)->next->n = (*stack)->n ^ (*stack)->next->n;
 	(*stack)->n = (*stack)->n ^ (*stack)->next->n;
@@ -49,13 +51,13 @@ void	push(t_list **s1, t_list **s2, t_list *temp)
 
 void	rotate(t_list **stack, int rev)
 {
-	if (!rev)
+	if (!rev && *stack && (*stack)->prev)
 		*stack = (*stack)->prev;
-	else
+	else if (rev && *stack && (*stack)->next)
 		*stack = (*stack)->next;
 }
 
-void	op(t_stacks *s, t_op op)
+void	op(t_stacks *s, t_op op, int print)
 {
 	if (op == SA)
 		swap(&(s->a));
@@ -79,7 +81,8 @@ void	op(t_stacks *s, t_op op)
 		rotate(&(s->a), RRR - op);
 		rotate(&(s->b), RRR - op);
 	}
-	print_op(op);
+	if (print)
+		print_op(op);
 }
 
 void	print_op(t_op op)

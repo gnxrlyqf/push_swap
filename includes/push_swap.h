@@ -44,7 +44,7 @@ typedef enum op
 	RR,
 	RRA,
 	RRB,
-	RRR
+	RRR,
 }	t_op;
 
 typedef struct s_move
@@ -56,7 +56,7 @@ typedef struct s_move
 void		swap(t_list **stack);
 void		push(t_list **s1, t_list **s2, t_list *temp);
 void		rotate(t_list **stack, int rev);
-void		op(t_stacks *s, t_op op);
+void		op(t_stacks *s, t_op op, int print);
 t_stacks	init_stack(char **av);
 t_list		*add_node(t_list **head, int n);
 int			stack_size(t_list *stack);
@@ -76,9 +76,9 @@ void		print_op(t_op op);
 int			max(int a, int b);
 int			validate_input(char **av);
 t_list		*find_node(t_list *stack, int n);
-void		throw_err(t_list *stack);
+void		throw_err(t_list *stack, int f);
 void		sort_three(t_stacks *stacks);
 void		free_stack(t_list *stack);
-int			is_sorted(t_list *stack);
+int			is_sorted(t_stacks stacks);
 
 #endif
