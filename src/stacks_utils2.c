@@ -98,7 +98,7 @@ t_list	*get_next(t_list *stack, int n)
 	return (next);
 }
 
-int	get_node_index(t_list *stack, t_list *node)
+int	get_index(t_list *stack, t_list *node)
 {
 	t_list	*curr;
 	int		index;

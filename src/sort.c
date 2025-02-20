@@ -33,10 +33,10 @@ int	cost_b(int n, t_list *b, int size, t_list **best)
 		if (curr == b)
 			break ;
 	}
-	if (min == size + 1)
+	if (min > size)
 	{
 		*best = get_max(b);
-		min = get_node_index(b, *best);
+		min = get_index(b, *best);
 	}
 	return (min - size * (min > size / 2));
 }
@@ -75,7 +75,10 @@ void	sort_three(t_stacks *stacks)
 	int	test;
 
 	if (stacks->a == stacks->a->next->next)
+	{
 		op(stacks, SA, 1);
+		return ;
+	}
 	test = (stacks->a->n > stacks->a->next->n);
 	test += (stacks->a->next->n > stacks->a->next->next->n);
 	test += (stacks->a->next->next->n > stacks->a->n);
@@ -94,7 +97,7 @@ void	fill(t_stacks *stacks)
 
 	while (stacks->b)
 	{
-		count = get_node_index(stacks->a, get_next(stacks->a, stacks->b->n));
+		count = get_index(stacks->a, get_next(stacks->a, stacks->b->n));
 		operation = RA;
 		if (count > stack_size(stacks->a) / 2)
 		{
@@ -104,7 +107,7 @@ void	fill(t_stacks *stacks)
 		loop_op(stacks, operation, count);
 		op(stacks, PA, 1);
 	}
-	count = get_node_index(stacks->a, get_min(stacks->a));
+	count = get_index(stacks->a, get_min(stacks->a));
 	operation = RA;
 	if (count > stack_size(stacks->a) / 2)
 	{
@@ -128,8 +131,8 @@ void	sort(t_stacks *stacks)
 		size_a = stack_size(stacks->a);
 		size_b = stack_size(stacks->b);
 		best = find_best(stacks, size_a, size_b, size_a + size_b);
-		pos_a = get_node_index(stacks->a, best.a);
-		pos_b = get_node_index(stacks->b, best.b);
+		pos_a = get_index(stacks->a, best.a);
+		pos_b = get_index(stacks->b, best.b);
 		moves(stacks, pos_a, pos_b);
 	}
 	sort_three(stacks);

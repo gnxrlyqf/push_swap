@@ -104,15 +104,15 @@ int	is_sorted(t_stacks stacks)
 	t_list	*curr;
 
 	if (stacks.b)
-		return (write(1, "KO\n", 3), 0);
+		return (0);
 	curr = stacks.a;
 	while (1)
 	{
 		if (curr->n > curr->next->n)
-			return (write(1, "KO\n", 3), 0);
+			return (0);
 		curr = curr->next;
 		if (curr->next == stacks.a)
 			break ;
 	}
-	return (write(1, "OK\n", 3), 1);
+	return (1);
 }

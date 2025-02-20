@@ -56,7 +56,7 @@ typedef struct s_move
 void		swap(t_list **stack);
 void		push(t_list **s1, t_list **s2, t_list *temp);
 void		rotate(t_list **stack, int rev);
-void		op(t_stacks *s, t_op op, int print);
+t_op		op(t_stacks *s, t_op op, int print);
 t_stacks	init_stack(char **av);
 t_list		*add_node(t_list **head, int n);
 int			stack_size(t_list *stack);
@@ -67,7 +67,7 @@ int			min(int a, int b);
 void		sort(t_stacks *stacks);
 void		moves(t_stacks *stacks, int pos_a, int pos_b);
 t_list		*get_node(t_list *stack, int index);
-int			get_node_index(t_list *stack, t_list *node);
+int			get_index(t_list *stack, t_list *node);
 t_list		*get_max(t_list *stack);
 t_list		*get_min(t_list *stack);
 t_list		*get_next(t_list *stack, int n);

@@ -69,7 +69,7 @@ void	free_stack(t_list *stack)
 
 void	throw_err(t_list *stack, int f)
 {
-	t_list *curr;
+	t_list	*curr;
 
 	if (stack && f)
 	{

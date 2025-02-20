@@ -20,7 +20,7 @@ int	contains_nl(char *str)
 	return (0);
 }
 
-void populate_list(t_line **head, char *str)
+void	populate_list(t_line **head, char *str)
 {
 	while (*str)
 		if (!gnl_add_node(head, *(str++)))
@@ -33,7 +33,7 @@ char	*get_next_line(int fd)
 	ssize_t			size;
 	static t_line	*head;
 
-	size = 1;
+	size = 4;
 	str = malloc((size_t)size + 1);
 	if (fd < 0 || !str)
 		return (free(str), free_list(&head), NULL);

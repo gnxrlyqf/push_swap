@@ -57,7 +57,7 @@ void	rotate(t_list **stack, int rev)
 		*stack = (*stack)->next;
 }
 
-void	op(t_stacks *s, t_op op, int print)
+t_op	op(t_stacks *s, t_op op, int print)
 {
 	if (op == SA)
 		swap(&(s->a));
@@ -83,6 +83,7 @@ void	op(t_stacks *s, t_op op, int print)
 	}
 	if (print)
 		print_op(op);
+	return (op);
 }
 
 void	print_op(t_op op)
