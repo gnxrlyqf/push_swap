@@ -31,7 +31,7 @@ typedef struct s_stacks
 	t_list	*b;
 }	t_stacks;
 
-typedef enum op
+typedef enum e_op
 {
 	NONE,
 	SA,
