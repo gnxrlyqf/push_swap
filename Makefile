@@ -7,14 +7,17 @@ NAME = push_swap
 BNAME = checker
 
 .PHONY: all clean fclean re bonus
+.SECONDARY:
 
 all: $(NAME)
 
 $(NAME): $(SRC:.c=.o)
 	$(CC) $^ $(INC) -o $(NAME)
 
-bonus: $(BONUS:.c=.o)
-	$(CC) $^ $(INC) -o $(BNAME) 
+bonus: $(BNAME)
+
+$(BNAME): $(BONUS:.c=.o)
+	$(CC) $^ $(INC) -o $(BNAME)
 
 %.o: %.c
 	$(CC) $(INC) $(CFLAGS) -c $< -o $@
