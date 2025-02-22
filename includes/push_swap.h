@@ -76,7 +76,7 @@ void		print_op(t_op op);
 int			max(int a, int b);
 int			validate_input(char **av);
 t_list		*find_node(t_list *stack, int n);
-void		throw_err(t_list *stack, int f);
+void		throw_err(t_list *stack);
 void		sort_three(t_stacks *stacks);
 void		free_stack(t_list *stack);
 int			is_sorted(t_stacks stacks);

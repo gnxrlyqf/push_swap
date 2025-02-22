@@ -24,14 +24,12 @@ long	ft_atoi_ptr(char **str)
 	while (*cpy == ' ' || (*cpy >= 9 && *cpy <= 13))
 		cpy++;
 	if (*cpy == '-' || *cpy == '+')
-	{
-		sign *= (44 - *cpy);
-		cpy++;
-	}
+		sign *= (44 - *cpy++);
 	while (*cpy >= '0' && *cpy <= '9')
 	{
-		result = result * 10 + (*cpy - '0');
-		cpy++;
+		result = result * 10 + (*cpy++ - '0');
+		if (result * sign > INT_MAX || result * sign < INT_MIN)
+			return (result * sign);
 	}
 	*str = cpy;
 	return (result * sign);
@@ -67,11 +65,11 @@ void	free_stack(t_list *stack)
 	}
 }
 
-void	throw_err(t_list *stack, int f)
+void	throw_err(t_list *stack)
 {
 	t_list	*curr;
 
-	if (stack && f)
+	if (stack)
 	{
 		curr = stack;
 		while (curr->next)

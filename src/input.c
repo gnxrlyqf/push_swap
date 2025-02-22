@@ -29,6 +29,8 @@ int	validate_input(char **av)
 
 	while (*av)
 	{
+		if (!**av)
+			return (0);
 		s = *av;
 		while (*s)
 		{

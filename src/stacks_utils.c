@@ -60,19 +60,17 @@ t_stacks	init_stack(char **av)
 	long		n;
 
 	stacks.a = NULL;
-	while (*av)
+	str = *av++;
+	while (str && *str)
 	{
-		str = *av;
-		while (*str)
-		{
-			n = ft_atoi_ptr(&str);
-			if (n > INT_MAX || n < INT_MIN || find_node(stacks.a, (int)n))
-				throw_err(stacks.a, 1);
-			new = add_node(&stacks.a, (int)n);
-			new->prev = prev;
-			prev = new;
-		}
-		av++;
+		n = ft_atoi_ptr(&str);
+		if (!*str)
+			str = *av++;
+		if (n > INT_MAX || n < INT_MIN || find_node(stacks.a, (int)n))
+			throw_err(stacks.a);
+		new = add_node(&stacks.a, (int)n);
+		new->prev = prev;
+		prev = new;
 	}
 	new->next = stacks.a;
 	stacks.a->prev = new;
