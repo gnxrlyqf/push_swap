@@ -80,7 +80,9 @@ int	main(int ac, char **av)
 {
 	t_stacks	stacks;
 
-	if (ac == 1 || !validate_input(av + 1))
+	if (ac == 1)
+		return (1);
+	if (!validate_input(av + 1))
 		return (write(2, "Error\n", 6));
 	stacks = init_stack(av + 1);
 	checker(&stacks);

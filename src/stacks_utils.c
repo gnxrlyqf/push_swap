@@ -51,33 +51,6 @@ t_list	*find_node(t_list *stack, int n)
 	return (curr);
 }
 
-t_stacks	init_stack(char **av)
-{
-	char		*str;
-	t_stacks	stacks;
-	t_list		*prev;
-	t_list		*new;
-	long		n;
-
-	stacks.a = NULL;
-	str = *av++;
-	while (str && *str)
-	{
-		n = ft_atoi_ptr(&str);
-		if (!*str)
-			str = *av++;
-		if (n > INT_MAX || n < INT_MIN || find_node(stacks.a, (int)n))
-			throw_err(stacks.a);
-		new = add_node(&stacks.a, (int)n);
-		new->prev = prev;
-		prev = new;
-	}
-	new->next = stacks.a;
-	stacks.a->prev = new;
-	stacks.b = NULL;
-	return (stacks);
-}
-
 int	stack_size(t_list *stack)
 {
 	int		size;
@@ -113,4 +86,20 @@ int	is_sorted(t_stacks stacks)
 			break ;
 	}
 	return (1);
+}
+
+void	free_stack(t_list *stack)
+{
+	t_list	*curr;
+	t_list	*temp;
+	int		size;
+
+	curr = stack;
+	size = stack_size(stack);
+	while (size--)
+	{
+		temp = curr;
+		curr = curr->next;
+		free(temp);
+	}
 }

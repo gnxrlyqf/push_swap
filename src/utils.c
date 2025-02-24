@@ -49,20 +49,11 @@ int	max(int a, int b)
 	return (b);
 }
 
-void	free_stack(t_list *stack)
+int abs(int n)
 {
-	t_list	*curr;
-	t_list	*temp;
-	int		size;
-
-	curr = stack;
-	size = stack_size(stack);
-	while (size--)
-	{
-		temp = curr;
-		curr = curr->next;
-		free(temp);
-	}
+	if (n < 0)
+		return (-n);
+	return (n);
 }
 
 void	throw_err(t_list *stack)

@@ -43,3 +43,30 @@ int	validate_input(char **av)
 	}
 	return (1);
 }
+
+t_stacks	init_stack(char **av)
+{
+	char		*str;
+	t_stacks	stacks;
+	t_list		*prev;
+	t_list		*new;
+	long		n;
+
+	stacks.a = NULL;
+	str = *av++;
+	while (str && *str)
+	{
+		n = ft_atoi_ptr(&str);
+		if (!*str)
+			str = *av++;
+		if (n > INT_MAX || n < INT_MIN || find_node(stacks.a, (int)n))
+			throw_err(stacks.a);
+		new = add_node(&stacks.a, (int)n);
+		new->prev = prev;
+		prev = new;
+	}
+	new->next = stacks.a;
+	stacks.a->prev = new;
+	stacks.b = NULL;
+	return (stacks);
+}
