@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -g #-Werror
+CFLAGS = -Wall -Wextra -Werror
 INC = -I./includes
 SRC = $(wildcard src/*.c)
 BONUS = $(wildcard bonus/*.c) $(filter-out src/main.c, $(SRC))
