@@ -31,6 +31,8 @@ long	ft_atoi_ptr(char **str)
 		if (result * sign > INT_MAX || result * sign < INT_MIN)
 			return (result * sign);
 	}
+	while (*cpy && *cpy == ' ')
+		cpy++;
 	*str = cpy;
 	return (result * sign);
 }
