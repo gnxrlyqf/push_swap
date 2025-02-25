@@ -35,7 +35,7 @@ t_list	*get_max(t_list *stack)
 
 	curr = stack;
 	out = curr;
-	max = 0;
+	max = get_min(stack)->n;
 	while (1)
 	{
 		if (curr->n > max)
@@ -80,16 +80,16 @@ t_list	*get_next(t_list *stack, int n)
 	t_list	*curr;
 
 	next = NULL;
-	min = get_max(stack)->n;
-	if (n > min)
+	min = INT_MAX;
+	if (n > get_max(stack)->n)
 		return (get_min(stack));
 	curr = stack;
 	while (1)
 	{
-		if (curr->n > n && curr->n - n < min)
+		if (curr->n > n && abs(curr->n - n) < min)
 		{
 			next = curr;
-			min = curr->n - n;
+			min = abs(curr->n - n);
 		}
 		curr = curr->next;
 		if (curr == stack)

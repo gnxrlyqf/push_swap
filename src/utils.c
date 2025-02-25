@@ -37,23 +37,17 @@ long	ft_atoi_ptr(char **str)
 
 int	min(int a, int b)
 {
-	if (a < b)
-		return (a);
-	return (b);
+	return (a * (a < b) + b * (a >= b));
 }
 
 int	max(int a, int b)
 {
-	if (a > b)
-		return (a);
-	return (b);
+	return (a * (a >= b) + b * (a < b));
 }
 
-int abs(int n)
+int	abs(int n)
 {
-	if (n < 0)
-		return (-n);
-	return (n);
+	return (n * (n >= 0) - n * (n < 0));
 }
 
 void	throw_err(t_list *stack)
