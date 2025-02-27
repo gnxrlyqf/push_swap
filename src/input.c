@@ -6,7 +6,7 @@
 /*   By: mchetoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:04:54 by mchetoui          #+#    #+#             */
-/*   Updated: 2025/02/18 17:04:59 by mchetoui         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:51:22 by mchetoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,23 @@ int	check(char c)
 int	validate_input(char **av)
 {
 	char	*s;
+	int		found;
 
 	while (*av)
 	{
-		if (!**av)
-			return (0);
 		s = *av;
+		found = 0;
 		while (*s)
 		{
+			if (check(*s) == 1)
+				found = 1;
 			if (check(*s) == 2 || (!check(*s) && !check(*(s + 1)))
 				|| check(*s) - check(*(s + 1)) == 1)
 				return (0);
 			s++;
 		}
+		if (!found)
+			return (0);
 		av++;
 	}
 	return (1);
